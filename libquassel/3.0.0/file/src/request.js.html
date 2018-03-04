@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/request.js | libquassel</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Javascript lib to connect and interact with Quassel IRC core"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="libquassel"><meta property="twitter:description" content="Javascript lib to connect and interact with Quassel IRC core"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/alias.js~AliasItem.html">AliasItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/buffer.js~IRCBuffer.html">IRCBuffer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/buffer.js~IRCBufferCollection.html">IRCBufferCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/buffer.js~IRCBufferUser.html">IRCBufferUser</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/bufferview.js~BufferView.html">BufferView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/identity.js~Identity.html">Identity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/ignore.js~IgnoreItem.html">IgnoreItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/ignore.js~IgnoreList.html">IgnoreList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/libquassel.js~Client.html">Client</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message.js~IRCMessage.html">IRCMessage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/network.js~Network.html">Network</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/network.js~NetworkCollection.html">NetworkCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/network.js~Server.html">Server</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/request.js~Core.html">Core</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/user.js~IRCUser.html">IRCUser</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/websocket.js~WebSocketStream.html">WebSocketStream</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-toArray">toArray</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-toCoreObject">toCoreObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Types">Types</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-IgnoreTypes">IgnoreTypes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ScopeTypes">ScopeTypes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Serializable">Serializable</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-StrictnessTypes">StrictnessTypes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-EventEmitter">EventEmitter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Features">Features</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Flags">Flags</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HighlightModes">HighlightModes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Types">Types</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ConnectionStates">ConnectionStates</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Types">Types</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-BufferInfo">BufferInfo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:aliases">Event:aliases</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:buffer.activate">Event:buffer.activate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:buffer.backlog">Event:buffer.backlog</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:buffer.deactivate">Event:buffer.deactivate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:buffer.lastseen">Event:buffer.lastseen</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:buffer.markerline">Event:buffer.markerline</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:buffer.merge">Event:buffer.merge</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:buffer.message">Event:buffer.message</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:buffer.read">Event:buffer.read</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:buffer.remove">Event:buffer.remove</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:buffer.rename">Event:buffer.rename</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.addnewbuffersautomatically">Event:bufferview.addnewbuffersautomatically</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.allowedbuffertypes">Event:bufferview.allowedbuffertypes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.bufferhidden">Event:bufferview.bufferhidden</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.bufferunhide">Event:bufferview.bufferunhide</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.bufferviewname">Event:bufferview.bufferviewname</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.disabledecoration">Event:bufferview.disabledecoration</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.hideinactivebuffers">Event:bufferview.hideinactivebuffers</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.hideinactivenetworks">Event:bufferview.hideinactivenetworks</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.ids">Event:bufferview.ids</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.init">Event:bufferview.init</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.minimumactivity">Event:bufferview.minimumactivity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.networkid">Event:bufferview.networkid</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.orderchanged">Event:bufferview.orderchanged</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.search">Event:bufferview.search</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.update">Event:bufferview.update</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:channel.addusermode">Event:channel.addusermode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:channel.join">Event:channel.join</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:channel.removeusermode">Event:channel.removeusermode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:channel.topic">Event:channel.topic</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:coreinfo">Event:coreinfo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:coreinfoinit">Event:coreinfoinit</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:error">Event:error</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:identities.init">Event:identities.init</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:identity">Event:identity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:identity.new">Event:identity.new</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:identity.remove">Event:identity.remove</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:ignorelist">Event:ignorelist</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:init">Event:init</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:login">Event:login</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:loginfailed">Event:loginfailed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.addbuffer">Event:network.addbuffer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.adduser">Event:network.adduser</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.autoidentify.password">Event:network.autoidentify.password</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.autoidentify.service">Event:network.autoidentify.service</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.autoreconnect.interval">Event:network.autoreconnect.interval</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.autoreconnect.retries">Event:network.autoreconnect.retries</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.codec.decoding">Event:network.codec.decoding</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.codec.encoding">Event:network.codec.encoding</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.codec.server">Event:network.codec.server</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.connected">Event:network.connected</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.connectionstate">Event:network.connectionstate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.disconnected">Event:network.disconnected</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.identity">Event:network.identity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.init">Event:network.init</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.latency">Event:network.latency</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.messagerate.burstsize">Event:network.messagerate.burstsize</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.messagerate.delay">Event:network.messagerate.delay</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.messagerate.unlimited">Event:network.messagerate.unlimited</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.mynick">Event:network.mynick</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.networkname">Event:network.networkname</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.new">Event:network.new</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.perform">Event:network.perform</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.rejoinchannels">Event:network.rejoinchannels</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.remove">Event:network.remove</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.sasl.account">Event:network.sasl.account</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.sasl.password">Event:network.sasl.password</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.server">Event:network.server</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.serverlist">Event:network.serverlist</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.unlimitedreconnectretries">Event:network.unlimitedreconnectretries</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.usecustommessagerate">Event:network.usecustommessagerate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.userrenamed">Event:network.userrenamed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.usesasl">Event:network.usesasl</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:setup">Event:setup</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:setupfailed">Event:setupfailed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:setupok">Event:setupok</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:user.away">Event:user.away</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:user.part">Event:user.part</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:user.quit">Event:user.quit</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:user.realname">Event:user.realname</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-loginCallback">loginCallback</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserType&lt;BufferId&gt;">UserType&lt;BufferId&gt;</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserType&lt;BufferInfo&gt;">UserType&lt;BufferInfo&gt;</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserType&lt;Identity&gt;">UserType&lt;Identity&gt;</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserType&lt;IdentityId&gt;">UserType&lt;IdentityId&gt;</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserType&lt;Message&gt;">UserType&lt;Message&gt;</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserType&lt;MsgId&gt;">UserType&lt;MsgId&gt;</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserType&lt;Network::Server&gt;">UserType&lt;Network::Server&gt;</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserType&lt;NetworkId&gt;">UserType&lt;NetworkId&gt;</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserType&lt;NetworkId&gt;">UserType&lt;NetworkId&gt;</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserType&lt;NetworkInfo&gt;">UserType&lt;NetworkInfo&gt;</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/request.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/*
+ * libquassel
+ * https://github.com/magne4000/node-libquassel
+ *
+ * Copyright (c) 2017 Jo&#xEB;l Charles
+ * Licensed under the MIT license.
+ */
+
+const { EventEmitter } = require(&apos;events&apos;);
+const { types: qtypes, socket } = require(&apos;qtdatastream&apos;);
+const logger = require(&apos;debug&apos;)(&apos;libquassel:request&apos;);
+const pkg = require(&apos;../package.json&apos;);
+
+import { Network, Server } from &apos;./network&apos;;
+
+/**
+ * @type {Object}
+ * @property {number} Types.INVALID
+ * @property {number} Types.SYNC
+ * @property {number} Types.RPCCALL
+ * @property {number} Types.INITREQUEST
+ * @property {number} Types.INITDATA
+ * @property {number} Types.HEARTBEAT
+ * @property {number} Types.HEARTBEATREPLY
+ */
+export const Types = {
+  INVALID: 0x00,
+  SYNC: 0x01,
+  RPCCALL: 0x02,
+  INITREQUEST: 0x03,
+  INITDATA: 0x04,
+  HEARTBEAT: 0x05,
+  HEARTBEATREPLY: 0x06
+};
+
+/**
+ * Decorator for SYNC methods
+ * @protected
+ */
+function sync(className, functionName, ...datatypes) {
+  const qsync = qtypes.QInt.from(Types.SYNC);
+  const qclassName = qtypes.QByteArray.from(className);
+  const qfunctionName = qtypes.QByteArray.from(functionName);
+  return function(target, _key, descriptor) {
+    return {
+      enumerable: false,
+      configurable: false,
+      writable: false,
+      value: function(...args) {
+        const [ id, ...data ] = descriptor.value.apply(this, args);
+        this.qtsocket.write([
+          qsync,
+          qclassName,
+          qtypes.QByteArray.from(id),
+          qfunctionName,
+          ...data.map((value, index) =&gt; datatypes[index].from(value))
+        ]);
+      }
+    };
+  };
+}
+
+/**
+ * Decorator for RPC methods
+ * @protected
+ */
+function rpc(functionName, ...datatypes) {
+  const qrpc = qtypes.QInt.from(Types.RPCCALL);
+  const qfunctionName = qtypes.QByteArray.from(`2${functionName}`);
+  return function(target, _key, descriptor) {
+    return {
+      enumerable: false,
+      configurable: false,
+      writable: false,
+      value: function(...args) {
+        const data = descriptor.value.apply(this, args);
+        this.qtsocket.write([
+          qrpc,
+          qfunctionName,
+          ...data.map((value, index) =&gt; datatypes[index].from(value))
+        ]);
+      }
+    };
+  };
+}
+
+/**
+ * Send commands to the core
+ */
+export class Core extends EventEmitter {
+  constructor(options) {
+    super();
+    this.options = options;
+    this.useSSL = false;
+    this.useCompression = false;
+    this.qtsocket = null;
+    this.duplex = null;
+  }
+
+  /**
+   * Handle magic number response
+   * @param {net.Duplex} duplex
+   */
+  init(duplex) {
+    this.duplex = duplex;
+    this.duplex.once(&apos;data&apos;, data =&gt; {
+      const ret = data.readUInt32BE(0);
+      if (((ret &gt;&gt; 24) &amp; 0x01) &gt; 0) {
+        this.useSSL = true;
+        logger(&apos;Core supports SSL&apos;);
+      }
+
+      if (((ret &gt;&gt; 24) &amp; 0x02) &gt; 0) {
+        this.useCompression = true;
+        logger(&apos;Core supports compression&apos;);
+      }
+
+      // if (self.useCompression) {
+      //   const zlib = require(&apos;zlib&apos;);
+      //     // Not working, don&apos;t know why yet
+      //     self.qtsocket = new qtdatastream.socket.Socket(self.client, function(buffer, next) {
+      //         zlib.inflate(buffer, next);
+      //     }, function(buffer, next) {
+      //         var deflate = zlib.createDeflate({flush: zlib.Z_SYNC_FLUSH}), buffers = [];
+      //         deflate.on(&apos;data&apos;, function(chunk) {
+      //             buffers.push(chunk);
+      //         });
+
+      //         deflate.on(&apos;end&apos;, function() {
+      //             logger(buffers);
+      //             next(null, Buffer.concat(buffers));
+      //         });
+
+      //         deflate.end(buffer);
+      //     });
+      // } else {
+      this.qtsocket = new socket.Socket(duplex);
+      // }
+
+      this.qtsocket
+      .on(&apos;data&apos;, data =&gt; this.emit(&apos;data&apos;, data))
+      .on(&apos;close&apos;, () =&gt; this.emit(&apos;close&apos;))
+      .on(&apos;end&apos;, () =&gt; this.emit(&apos;end&apos;))
+      .on(&apos;error&apos;, e =&gt; this.emit(&apos;error&apos;, e));
+
+      this.sendClientInfo(this.useSSL, this.useCompression);
+    });
+  }
+
+  /**
+   * Begins SSL handshake if necessary.
+   * This method returns a Promise.
+   * @param {function} callback
+   */
+  finishClientInit(callback) {
+    if (this.useSSL) {
+      logger(&apos;SECURE&apos;);
+      const tls = require(&apos;tls&apos;);
+      const secureContext = tls.createSecureContext({
+        secureProtocol: &apos;TLSv1_2_client_method&apos;
+      });
+      const secureStream = tls.connect({
+        socket: this.duplex,
+        rejectUnauthorized: false,
+        secureContext: secureContext
+      });
+      secureStream.once(&apos;secure&apos;, callback);
+      this.qtsocket.setSocket(secureStream);
+    } else {
+      logger(&apos;PLAIN&apos;);
+      callback();
+    }
+  }
+
+  /**
+   * Send heartbeat response
+   * @param {boolean} reply
+   */
+  heartBeat(reply) {
+    const d = new Date();
+    const ms = d.getTime() - d.setHours(0, 0, 0, 0);
+    const slist = [
+      reply ? Types.HEARTBEAT : Types.HEARTBEATREPLY,
+      qtypes.QTime.from(ms)
+    ];
+    logger(&apos;Sending heartbeat&apos;);
+    this.qtsocket.write(slist);
+  }
+
+  /**
+   * Core Sync request - Backlogs
+   * @param {number} bufferId
+   * @param {number} [firstMsgId=-1]
+   * @param {number} [lastMsgId=-1]
+   * @param {?number} [maxAmount=backloglimit]
+   */
+  @sync(
+    &apos;BacklogManager&apos;,
+    &apos;requestBacklog&apos;,
+    qtypes.QUserType.get(&apos;BufferId&apos;),
+    qtypes.QUserType.get(&apos;MsgId&apos;),
+    qtypes.QUserType.get(&apos;MsgId&apos;),
+    qtypes.QInt,
+    qtypes.QInt
+  )
+  backlog(bufferId, firstMsgId = -1, lastMsgId = -1, maxAmount = undefined) {
+    maxAmount = maxAmount === undefined ? this.options.backloglimit : maxAmount;
+    logger(&apos;Sending backlog request&apos;);
+    return [ &apos;&apos;, bufferId, firstMsgId, lastMsgId, maxAmount, 0 ];
+  }
+
+  /**
+   * Core Sync request - Connect the specified network
+   * @param {number} networkId
+   */
+  @sync(&apos;Network&apos;, &apos;requestConnect&apos;)
+  connectNetwork(networkId) {
+    logger(&apos;Sending connection request&apos;);
+    return [ String(networkId) ];
+  }
+
+  /**
+   * Core Sync request - Disconnect the specified network
+   * @param {number} networkId
+   */
+  @sync(&apos;Network&apos;, &apos;requestDisconnect&apos;)
+  disconnectNetwork(networkId) {
+    logger(&apos;Sending disconnection request&apos;);
+    return [ String(networkId) ];
+  }
+
+  /**
+   * Core Sync request - Update network information
+   * @param {Number} networkId
+   * @param {Network} network
+   */
+  @sync(&apos;Network&apos;, &apos;requestSetNetworkInfo&apos;, qtypes.QClass)
+  setNetworkInfo(networkId, network) {
+    logger(&apos;Sending update request (Network)&apos;);
+    return [ String(networkId), network ];
+  }
+
+  /**
+   * Core Sync request - Mark buffer as read
+   * @param {number} bufferId
+   */
+  @sync(&apos;BufferSyncer&apos;, &apos;requestMarkBufferAsRead&apos;, qtypes.QUserType.get(&apos;BufferId&apos;))
+  markBufferAsRead(bufferId) {
+    logger(&apos;Sending mark buffer as read request&apos;);
+    return [ &apos;&apos;, bufferId ];
+  }
+
+  /**
+   * Core Sync request - Set all messages before messageId as read for specified buffer
+   * @param {number} bufferId
+   * @param {number} messageId
+   */
+  @sync(&apos;BufferSyncer&apos;, &apos;requestSetLastSeenMsg&apos;, qtypes.QUserType.get(&apos;BufferId&apos;), qtypes.QUserType.get(&apos;MsgId&apos;))
+  setLastMsgRead(bufferId, messageId) {
+    logger(&apos;Sending last message read request&apos;);
+    return [ &apos;&apos;, bufferId, messageId ];
+  }
+
+  /**
+   * Core Sync request - Mark a specified buffer line
+   * @param {number} bufferId
+   * @param {number} messageId
+   */
+  @sync(&apos;BufferSyncer&apos;, &apos;requestSetMarkerLine&apos;, qtypes.QUserType.get(&apos;BufferId&apos;), qtypes.QUserType.get(&apos;MsgId&apos;))
+  setMarkerLine(bufferId, messageId) {
+    logger(&apos;Sending mark line request&apos;);
+    return [ &apos;&apos;, bufferId, messageId ];
+  }
+
+  /**
+   * Core Sync request - Remove a buffer
+   * @param {number} bufferId
+   */
+  @sync(&apos;BufferSyncer&apos;, &apos;requestRemoveBuffer&apos;, qtypes.QUserType.get(&apos;BufferId&apos;))
+  removeBuffer(bufferId) {
+    logger(&apos;Sending perm hide request&apos;);
+    return [ &apos;&apos;, bufferId ];
+  }
+
+  /**
+   * Core Sync request - Merge bufferId2 into bufferId1
+   * @param {number} bufferId1
+   * @param {number} bufferId2
+   */
+  @sync(&apos;BufferSyncer&apos;, &apos;requestMergeBuffersPermanently&apos;, qtypes.QUserType.get(&apos;BufferId&apos;), qtypes.QUserType.get(&apos;BufferId&apos;))
+  mergeBuffersPermanently( bufferId1, bufferId2) {
+    logger(&apos;Sending merge request&apos;);
+    return [ &apos;&apos;, bufferId1, bufferId2 ];
+  }
+
+  /**
+   * Core Sync request - Rename a buffer
+   * @param {number} bufferId
+   * @param {string} newName
+   */
+   @sync(&apos;BufferSyncer&apos;, &apos;requestMergeBuffersPermanently&apos;, qtypes.QUserType.get(&apos;BufferId&apos;), qtypes.QString)
+  renameBuffer(bufferId, newName) {
+    logger(&apos;Sending rename buffer request&apos;);
+    return [ &apos;&apos;, bufferId, newName ];
+  }
+
+  /**
+   * Core Sync request - Hide a buffer temporarily
+   * @param {number} bufferViewId
+   * @param {number} bufferId
+   */
+  @sync(&apos;BufferViewConfig&apos;, &apos;requestRemoveBuffer&apos;, qtypes.QUserType.get(&apos;BufferId&apos;))
+  hideBufferTemporarily(bufferViewId, bufferId) {
+    logger(&apos;Sending temp hide request&apos;);
+    return [ String(bufferViewId), bufferId ];
+  }
+
+  /**
+   * Core Sync request - Hide a buffer permanently
+   * @param {number} bufferViewId
+   * @param {number} bufferId
+   */
+  @sync(&apos;BufferViewConfig&apos;, &apos;requestRemoveBufferPermanently&apos;, qtypes.QUserType.get(&apos;BufferId&apos;))
+  hideBufferPermanently(bufferViewId, bufferId) {
+    logger(&apos;Sending perm hide request&apos;);
+    return [ String(bufferViewId), bufferId ];
+  }
+
+  /**
+   * Core Sync request - Unhide a buffer
+   * @param {number} bufferViewId
+   * @param {number} bufferId
+   * @param {number} pos
+   */
+  @sync(&apos;BufferViewConfig&apos;, &apos;requestAddBuffer&apos;, qtypes.QUserType.get(&apos;BufferId&apos;), qtypes.QInt)
+  unhideBuffer(bufferViewId, bufferId, pos) {
+    logger(&apos;Sending unhide request&apos;);
+    return [ String(bufferViewId), bufferId, pos ];
+  }
+
+  /**
+   * Core Sync request - Create a new chat list
+   * @experimental
+   * @param {Object} data
+   * @example
+   * FIXME
+   * createBufferView({
+   *     sortAlphabetically: 1,
+   *     showSearch: 0,
+   *     networkId: 0,
+   *     minimumActivity: 0,
+   *     hideInactiveNetworks: 0,
+   *     hideInactiveBuffers: 0,
+   *     disableDecoration: 0,
+   *     bufferViewName: &apos;All Chats&apos;,
+   *     allowedBufferTypes: 15,
+   *     addNewBuffersAutomatically: 1,
+   *     TemporarilyRemovedBuffers: [],
+   *     RemovedBuffers: [],
+   *     BufferList: []
+   * });
+   */
+  @sync(&apos;BufferViewManager&apos;, &apos;requestCreateBufferView&apos;, qtypes.QMap)
+  createBufferView(data) {
+    logger(&apos;Sending create buffer view request&apos;);
+    return [ &apos;&apos;, data ];
+  }
+
+  /**
+   * Core Sync request - Update ignoreList
+   * @param {object} ignoreList
+   */
+  @sync(&apos;IgnoreListManager&apos;, &apos;requestUpdate&apos;, qtypes.QList)
+  updateIgnoreListManager(ignoreList) {
+    logger(&apos;Sending update request (IgnoreListManager)&apos;);
+    return [ &apos;&apos;, ignoreList ];
+  }
+
+  /**
+   * Core Sync request - Update identity
+   * @param {Number} identityId
+   * @param {Identity} identity
+   */
+  @sync(&apos;Identity&apos;, &apos;requestUpdate&apos;, qtypes.QClass)
+  updateIdentity(identityId, identity) {
+    logger(&apos;Sending update request (Identity)&apos;);
+    return [ String(identityId), identity ];
+  }
+
+  /**
+   * Core Sync request - Update aliases
+   * @param {object} data see {@link toCoreObject}
+   */
+  @sync(&apos;AliasManager&apos;, &apos;requestUpdate&apos;, qtypes.QMap)
+  updateAliasManager(data) {
+    logger(&apos;Sending update request (AliasManager)&apos;);
+    return [ &apos;&apos;, data ];
+  }
+
+  @sync(&apos;BufferSyncer&apos;, &apos;requestPurgeBufferIds&apos;)
+  purgeBufferIds() {
+    logger(&apos;Sending purge buffer ids request&apos;);
+    return [];
+  }
+
+  /**
+   * Core RPC request - Remove an {@link Identity}
+   * @param {number} identityId
+   */
+  @rpc(&apos;removeIdentity(IdentityId)&apos;, qtypes.QUserType.get(&apos;IdentityId&apos;))
+  removeIdentity(identityId) {
+    logger(&apos;Deleting identity&apos;);
+    return [ identityId ];
+  }
+
+  /**
+   * Core RPC request - Remove a {@link Network}
+   * @param {number} networkId
+   */
+  @rpc(&apos;removeNetwork(NetworkId)&apos;, qtypes.QUserType.get(&apos;NetworkId&apos;))
+  removeNetwork (networkId) {
+    logger(&apos;Deleting nhetwork&apos;);
+    return [ networkId ];
+  }
+
+  /**
+   * Core RPC request - Send a user input to a specified buffer
+   * @param {bufferInfo} bufferInfo
+   * @param {String} message
+   */
+  @rpc(&apos;sendInput(BufferInfo,QString)&apos;, qtypes.QUserType.get(&apos;BufferInfo&apos;), qtypes.QString)
+  sendMessage(bufferInfo, message) {
+    logger(&apos;Sending message&apos;);
+    return [ bufferInfo, message ];
+  }
+
+  /**
+   * Core RPC request - Create a new {@link module:identity}
+   * @param {module:identity} identity
+   */
+  @rpc(&apos;createIdentity(Identity,QVariantMap)&apos;, qtypes.QUserType.get(&apos;Identity&apos;), qtypes.QMap)
+  createIdentity(identity) {
+    logger(&apos;Creating identity&apos;);
+    return [ identity, {}];
+  }
+
+  /**
+   * Core RPC request - Create a new {@link module:network.Network}
+   * @param {String} networkName
+   * @param {number} identityId
+   * @param {String|Object} initialServer - Server hostname or IP, or full Network::Server Object. Can also be undefined if options.ServerList is defined.
+   * @param {String} [initialServer.Host=initialServer]
+   * @param {String} [initialServer.Port=&quot;6667&quot;]
+   * @param {String} [initialServer.Password=&quot;&quot;]
+   * @param {boolean} [initialServer.UseSSL=true]
+   * @param {number} [initialServer.sslVersion=0]
+   * @param {boolean} [initialServer.UseProxy=false]
+   * @param {number} [initialServer.ProxyType=0]
+   * @param {String} [initialServer.ProxyHost=&quot;&quot;]
+   * @param {String} [initialServer.ProxyPort=&quot;&quot;]
+   * @param {String} [initialServer.ProxyUser=&quot;&quot;]
+   * @param {String} [initialServer.ProxyPass=&quot;&quot;]
+   * @param {Object} [options]
+   * @param {String} [options.codecForServer=&quot;&quot;]
+   * @param {String} [options.codecForEncoding=&quot;&quot;]
+   * @param {String} [options.codecForDecoding=&quot;&quot;]
+   * @param {boolean} [options.useRandomServer=false]
+   * @param {String[]} [options.perform=[]]
+   * @param {Object[]} [options.ServerList=[]]
+   * @param {boolean} [options.useAutoIdentify=false]
+   * @param {String} [options.autoIdentifyService=&quot;NickServ&quot;]
+   * @param {String} [options.autoIdentifyPassword=&quot;&quot;]
+   * @param {boolean} [options.useSasl=false]
+   * @param {String} [options.saslAccount=&quot;&quot;]
+   * @param {String} [options.saslPassword=&quot;&quot;]
+   * @param {boolean} [options.useAutoReconnect=true]
+   * @param {number} [options.autoReconnectInterval=60]
+   * @param {number} [options.autoReconnectRetries=20]
+   * @param {boolean} [options.unlimitedReconnectRetries=false]
+   * @param {boolean} [options.rejoinChannels=true]
+   * @param {boolean} [options.useCustomMessageRate=false]
+   * @param {boolean} [options.unlimitedMessageRate=false]
+   * @param {number} [options.msgRateMessageDelay=2200]
+   * @param {number} [options.msgRateBurstSize=5]
+   */
+  @rpc(&apos;createNetwork(NetworkInfo,QStringList)&apos;, qtypes.QClass, qtypes.QStringList)
+  createNetwork(networkName, identityId, initialServer, options = {}) {
+    const network = new Network(-1, networkName);
+    network.identityId = identityId;
+    network.update(options);
+    if (typeof initialServer === &apos;string&apos;) {
+      initialServer = {
+        host: initialServer
+      };
+    }
+    network.ServerList.push(new Server(initialServer));
+    logger(&apos;Creating network&apos;);
+    return [ network, []];
+  }
+
+  /**
+   * Sends an initialization request to quasselcore for specified `classname` and `objectname`
+   * @param {String} classname
+   * @param {String} objectname
+   * @example
+   * quassel.core.sendInitRequest(&quot;IrcUser&quot;, &quot;1/randomuser&quot;);
+   */
+  sendInitRequest(classname, objectname = &apos;&apos;) {
+    const initRequest = [
+      qtypes.QUInt.from(Types.INITREQUEST),
+      qtypes.QString.from(classname),
+      qtypes.QString.from(objectname)
+    ];
+    this.qtsocket.write(initRequest);
+  }
+
+  /**
+   * Sends client information to the core
+   * @param {boolean} useSSL
+   * @param {boolean} useCompression - Not supported
+   * @protected
+   */
+  sendClientInfo(useSSL, useCompression){
+    const smap = {
+      &apos;ClientDate&apos;: &apos;&apos;,
+      &apos;UseSsl&apos;: useSSL,
+      &apos;ClientVersion&apos;: `${pkg.name} ${pkg.version}`,
+      &apos;UseCompression&apos;: useCompression,
+      &apos;MsgType&apos;: &apos;ClientInit&apos;,
+      &apos;ProtocolVersion&apos;: 10
+    };
+    logger(&apos;Sending client informations&apos;);
+    this.qtsocket.write(smap);
+  }
+
+  /**
+   * Setup core
+   * @param {String} backend
+   * @param {String} adminuser
+   * @param {String} adminpassword
+   * @param {Object} [properties={}]
+   */
+  setupCore(backend, adminuser, adminpassword, properties = {}) {
+    const obj = {
+      SetupData: {
+        ConnectionProperties: properties,
+        Backend: backend,
+        AdminUser: adminuser,
+        AdminPasswd: adminpassword
+      },
+      MsgType: &apos;CoreSetupData&apos;
+    };
+
+    this.qtsocket.write(obj);
+  }
+
+  /**
+   * Send login request to the core
+   * @param {String} user
+   * @param {String} password
+   */
+  login(user, password) {
+    const obj = {
+      &apos;MsgType&apos;: &apos;ClientLogin&apos;,
+      &apos;User&apos;: user,
+      &apos;Password&apos;: password
+    };
+    this.qtsocket.write(obj);
+  }
+
+  /**
+   * Send magic number to the core
+   */
+  connect() {
+    let magic = 0x42b33f00;
+    // magic | 0x01 Encryption
+    // magic | 0x02 Compression
+    if (this.options.securecore) {
+      magic |= 0x01;
+    }
+
+    // At this point `duplex` must already be connected
+    const bufs = [
+      qtypes.QUInt.from(magic).toBuffer(),
+      qtypes.QUInt.from(0x01).toBuffer(),
+      qtypes.QUInt.from(0x01 &lt;&lt; 31).toBuffer()
+    ];
+    this.duplex.write(Buffer.concat(bufs));
+  }
+
+  /**
+   * Disconnect the client from the core
+   */
+  disconnect() {
+    this.duplex.end();
+    this.duplex.destroy();
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
