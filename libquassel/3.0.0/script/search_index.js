@@ -625,13 +625,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/buffer.js~ircbuffer#name",
-    "class/src/buffer.js~IRCBuffer.html#instance-get-name",
+    "class/src/buffer.js~IRCBuffer.html#instance-set-name",
     "src/buffer.js~IRCBuffer#name",
     "member"
   ],
   [
     "src/buffer.js~ircbuffer#name",
-    "class/src/buffer.js~IRCBuffer.html#instance-set-name",
+    "class/src/buffer.js~IRCBuffer.html#instance-get-name",
     "src/buffer.js~IRCBuffer#name",
     "member"
   ],
@@ -793,13 +793,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/buffer.js~ircbufferuser#modes",
-    "class/src/buffer.js~IRCBufferUser.html#instance-set-modes",
+    "class/src/buffer.js~IRCBufferUser.html#instance-get-modes",
     "src/buffer.js~IRCBufferUser#modes",
     "member"
   ],
   [
     "src/buffer.js~ircbufferuser#modes",
-    "class/src/buffer.js~IRCBufferUser.html#instance-get-modes",
+    "class/src/buffer.js~IRCBufferUser.html#instance-set-modes",
     "src/buffer.js~IRCBufferUser#modes",
     "member"
   ],
@@ -1998,6 +1998,12 @@ window.esdocSearchIndex = [
     "typedef"
   ],
   [
+    "src/libquassel.js~event:unhandled",
+    "typedef/index.html#static-typedef-Event:unhandled",
+    "src/libquassel.js~Event:unhandled",
+    "typedef"
+  ],
+  [
     "src/libquassel.js~event:user.away",
     "typedef/index.html#static-typedef-Event:user.away",
     "src/libquassel.js~Event:user.away",
@@ -2281,13 +2287,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/network.js~network#isconnected",
-    "class/src/network.js~Network.html#instance-set-isConnected",
+    "class/src/network.js~Network.html#instance-get-isConnected",
     "src/network.js~Network#isConnected",
     "member"
   ],
   [
     "src/network.js~network#isconnected",
-    "class/src/network.js~Network.html#instance-get-isConnected",
+    "class/src/network.js~Network.html#instance-set-isConnected",
     "src/network.js~Network#isConnected",
     "member"
   ],
@@ -2311,13 +2317,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/network.js~network#mynick",
-    "class/src/network.js~Network.html#instance-get-myNick",
+    "class/src/network.js~Network.html#instance-set-myNick",
     "src/network.js~Network#myNick",
     "member"
   ],
   [
     "src/network.js~network#mynick",
-    "class/src/network.js~Network.html#instance-set-myNick",
+    "class/src/network.js~Network.html#instance-get-myNick",
     "src/network.js~Network#myNick",
     "member"
   ],
@@ -2353,13 +2359,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/network.js~network#nick",
-    "class/src/network.js~Network.html#instance-set-nick",
+    "class/src/network.js~Network.html#instance-get-nick",
     "src/network.js~Network#nick",
     "member"
   ],
   [
     "src/network.js~network#nick",
-    "class/src/network.js~Network.html#instance-get-nick",
+    "class/src/network.js~Network.html#instance-set-nick",
     "src/network.js~Network#nick",
     "member"
   ],

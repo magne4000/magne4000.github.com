@@ -136,6 +136,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:setup">Event:setup</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:setupfailed">Event:setupfailed</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:setupok">Event:setupok</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:unhandled">Event:unhandled</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:user.away">Event:user.away</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:user.part">Event:user.part</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:user.quit">Event:user.quit</a></span></span></li>
@@ -283,6 +284,7 @@ export class Client extends EventEmitter {
    * @emits {Event:setupok}
    * @emits {Event:setupfailed}
    * @emits {Event:identities.init}
+   * @emits {Event:unhandled}
    * @protected
    */
   handleMsgType(obj) {
@@ -311,6 +313,7 @@ export class Client extends EventEmitter {
       break;
     default:
       logger(&apos;Unhandled MsgType %s&apos;, obj.MsgType);
+      this.emit(&apos;unhandled&apos;, obj);
     }
   }
 
@@ -1695,6 +1698,11 @@ export class Client extends EventEmitter {
  * This event is fired if the setup of the core has failed
  * @typedef {Event} Event:setupfailed
  * @property {Object} error - The reason of the failure
+ */
+/**
+ * This event is fired if an unhandled message is received
+ * @typedef {Event} Event:unhandled
+ * @property {Object} obj
  */
 /**
  * An error occured

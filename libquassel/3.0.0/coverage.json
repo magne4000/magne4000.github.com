@@ -145,8 +145,8 @@
         238,
         246,
         267,
-        392,
-        396
+        393,
+        397
       ]
     },
     "src/request.js": {
@@ -194,8 +194,8 @@
       "actualCount": 19,
       "undocumentLines": [
         47,
-        48,
-        55
+        51,
+        54
       ]
     },
     "src/usertypes.js": {

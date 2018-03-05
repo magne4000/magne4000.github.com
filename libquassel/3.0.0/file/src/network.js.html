@@ -136,6 +136,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:setup">Event:setup</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:setupfailed">Event:setupfailed</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:setupok">Event:setupok</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:unhandled">Event:unhandled</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:user.away">Event:user.away</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:user.part">Event:user.part</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:user.quit">Event:user.quit</a></span></span></li>
@@ -520,20 +521,21 @@ export class Network extends EventEmitter {
    * @protected
    * @param {Object} uac
    */
+  @serialize(qtypes.QMap, &apos;IrcUsersAndChannels&apos;)
   set ircUsersAndChannels(uac) {
     // Create IRCUsers and attach them to network
-    for (let user of uac.users) {
+    for (let user of Object.values(uac.users)) {
       this.addUser(new IRCUser(user));
     }
     // If there is a buffer corresponding to a nick, activate the buffer
     for (let buffer of this.buffers.values()) {
-      if (!buffer.isChannel &amp;&amp; this.hasUser(buffer.name)) {
+      if (!buffer.isChannel &amp;&amp; !buffer.isStatusBuffer &amp;&amp; this.hasUser(buffer.name)) {
         buffer.isActive = true;
       }
     }
     // Attach channels to network
     let channel, nick, user;
-    for (let key of uac.channels) {
+    for (let key of Object.keys(uac.channels)) {
       channel = this.getBuffer(key);
       // Then attach users to channels
       for (nick in uac.channels[key].UserModes) {

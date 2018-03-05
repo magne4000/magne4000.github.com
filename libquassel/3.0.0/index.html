@@ -136,6 +136,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:setup">Event:setup</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:setupfailed">Event:setupfailed</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:setupok">Event:setupok</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:unhandled">Event:unhandled</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:user.away">Event:user.away</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:user.part">Event:user.part</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:user.quit">Event:user.quit</a></span></span></li>
@@ -167,8 +168,33 @@ npm run watch
 # before commit, make the dev version + minified version + the doc
 npm run build</code>
 </code></pre>
-<h3 id="3-0-breaking-changes">3.0 breaking changes</h3><p>Version <code>3.0</code> introduces many changes:</p>
-<h3 id="getting-started">Getting Started</h3><h4 id="node">node</h4><pre><code class="lang-javascript"><code class="source-code prettyprint">const { Client } = require(&apos;libquassel.js&apos;);
+<h3 id="3-0-breaking-changes">3.0 breaking changes</h3><p>Version <code>3.0</code> introduces the following breaking changes:</p>
+<ul>
+<li><code>message.Type</code> has been superseded by <code>message.Types</code>, and all its constants are now UPPERCASE</li>
+<li><code>channel.active</code> has been superseded by <code>channel.isActive</code></li>
+<li><code>channel.isChannel()</code> has been superseded by <code>channel.isChannel</code></li>
+<li><code>channel.isHighlighted()</code> has been superseded by <code>channel.isHighlighted</code></li>
+<li><code>message.isHighlighted()</code> has been superseded by <code>message.isHighlighted</code></li>
+<li><code>message.isSelf()</code> has been superseded by <code>message.isSelf</code></li>
+<li><code>network.getBufferCollection()</code> and <code>network.getBufferMap()</code> have been merged into <code>networks.buffers</code></li>
+<li><code>networkCollection.findBuffer(...)</code> and <code>networkCollection.get(...)</code> have been merged into <code>network.getBuffer(...)</code></li>
+<li>The majority of setter methods has been replaced by direct affectation to the target property<ul>
+<li>e.g. <code>network.setName(name)</code> as been superseded by <code>network.name = name</code></li>
+</ul>
+</li>
+<li>The majority of getter methods has been replaced by direct access to the target property<ul>
+<li>e.g. <code>network.getStatusBuffer()</code> as been superseded by <code>network.statusBuffer</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="node-specific">node specific</h4><ul>
+<li><code>Client(...).connect</code> method expects a <code>Socket</code> or any other <code>Duplex</code> as parameter.</li>
+</ul>
+<h4 id="browser-specific">browser specific</h4><ul>
+<li><code>libquassel</code> is available as a global object.</li>
+<li><code>Client(...).connect</code> method expects a <code>libquassel.WebSocketStream</code> or any other <code>Duplex</code> as parameter.</li>
+</ul>
+<h3 id="getting-started">Getting Started</h3><h4 id="node">node</h4><pre><code class="lang-javascript"><code class="source-code prettyprint">const { Client } = require(&apos;libquassel&apos;);
 const net = require(&apos;net&apos;);
 
 const socket = net.createConnection({
