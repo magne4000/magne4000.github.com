@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/buffer.js | libquassel</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Javascript lib to connect and interact with Quassel IRC core"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="libquassel"><meta property="twitter:description" content="Javascript lib to connect and interact with Quassel IRC core"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/alias.js~AliasItem.html">AliasItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/buffer.js~IRCBuffer.html">IRCBuffer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/buffer.js~IRCBufferCollection.html">IRCBufferCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/buffer.js~IRCBufferUser.html">IRCBufferUser</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/bufferview.js~BufferView.html">BufferView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/highlight.js~HighlightRule.html">HighlightRule</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/highlight.js~HighlightRuleManager.html">HighlightRuleManager</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/identity.js~Identity.html">Identity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/ignore.js~IgnoreItem.html">IgnoreItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/ignore.js~IgnoreList.html">IgnoreList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/libquassel.js~Client.html">Client</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message.js~IRCMessage.html">IRCMessage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/network.js~Network.html">Network</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/network.js~NetworkCollection.html">NetworkCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/network.js~Server.html">Server</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/request.js~Core.html">Core</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/user.js~IRCUser.html">IRCUser</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/websocket.js~WebSocketStream.html">WebSocketStream</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-toArray">toArray</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-toCoreObject">toCoreObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Types">Types</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HighlightNickType">HighlightNickType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Serializable">Serializable</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-IgnoreTypes">IgnoreTypes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ScopeTypes">ScopeTypes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-StrictnessTypes">StrictnessTypes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-EventEmitter">EventEmitter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Features">Features</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Flags">Flags</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HighlightModes">HighlightModes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Types">Types</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ConnectionStates">ConnectionStates</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Types">Types</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-BufferInfo">BufferInfo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:aliases">Event:aliases</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:buffer.activate">Event:buffer.activate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:buffer.activity">Event:buffer.activity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:buffer.backlog">Event:buffer.backlog</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:buffer.deactivate">Event:buffer.deactivate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:buffer.lastseen">Event:buffer.lastseen</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:buffer.markerline">Event:buffer.markerline</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:buffer.merge">Event:buffer.merge</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:buffer.message">Event:buffer.message</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:buffer.read">Event:buffer.read</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:buffer.remove">Event:buffer.remove</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:buffer.rename">Event:buffer.rename</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.addnewbuffersautomatically">Event:bufferview.addnewbuffersautomatically</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.allowedbuffertypes">Event:bufferview.allowedbuffertypes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.bufferhidden">Event:bufferview.bufferhidden</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.bufferunhide">Event:bufferview.bufferunhide</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.bufferviewname">Event:bufferview.bufferviewname</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.disabledecoration">Event:bufferview.disabledecoration</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.hideinactivebuffers">Event:bufferview.hideinactivebuffers</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.hideinactivenetworks">Event:bufferview.hideinactivenetworks</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.ids">Event:bufferview.ids</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.init">Event:bufferview.init</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.minimumactivity">Event:bufferview.minimumactivity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.networkid">Event:bufferview.networkid</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.orderchanged">Event:bufferview.orderchanged</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.search">Event:bufferview.search</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:bufferview.update">Event:bufferview.update</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:channel.addusermode">Event:channel.addusermode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:channel.join">Event:channel.join</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:channel.removeusermode">Event:channel.removeusermode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:channel.topic">Event:channel.topic</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:coreinfo">Event:coreinfo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:coreinfoinit">Event:coreinfoinit</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:error">Event:error</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:highlightrules">Event:highlightrules</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:identities.init">Event:identities.init</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:identity">Event:identity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:identity.new">Event:identity.new</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:identity.remove">Event:identity.remove</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:ignorelist">Event:ignorelist</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:init">Event:init</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:login">Event:login</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:loginfailed">Event:loginfailed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.addbuffer">Event:network.addbuffer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.adduser">Event:network.adduser</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.autoidentify.password">Event:network.autoidentify.password</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.autoidentify.service">Event:network.autoidentify.service</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.autoreconnect.interval">Event:network.autoreconnect.interval</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.autoreconnect.retries">Event:network.autoreconnect.retries</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.codec.decoding">Event:network.codec.decoding</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.codec.encoding">Event:network.codec.encoding</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.codec.server">Event:network.codec.server</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.connected">Event:network.connected</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.connectionstate">Event:network.connectionstate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.disconnected">Event:network.disconnected</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.identity">Event:network.identity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.init">Event:network.init</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.latency">Event:network.latency</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.messagerate.burstsize">Event:network.messagerate.burstsize</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.messagerate.delay">Event:network.messagerate.delay</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.messagerate.unlimited">Event:network.messagerate.unlimited</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.mynick">Event:network.mynick</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.networkname">Event:network.networkname</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.new">Event:network.new</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.perform">Event:network.perform</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.rejoinchannels">Event:network.rejoinchannels</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.remove">Event:network.remove</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.sasl.account">Event:network.sasl.account</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.sasl.password">Event:network.sasl.password</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.server">Event:network.server</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.serverlist">Event:network.serverlist</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.unlimitedreconnectretries">Event:network.unlimitedreconnectretries</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.usecustommessagerate">Event:network.usecustommessagerate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.userrenamed">Event:network.userrenamed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:network.usesasl">Event:network.usesasl</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:setup">Event:setup</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:setupfailed">Event:setupfailed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:setupok">Event:setupok</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:unhandled">Event:unhandled</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:user.away">Event:user.away</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:user.part">Event:user.part</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:user.quit">Event:user.quit</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Event:user.realname">Event:user.realname</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-loginCallback">loginCallback</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserType&lt;BufferId&gt;">UserType&lt;BufferId&gt;</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserType&lt;BufferInfo&gt;">UserType&lt;BufferInfo&gt;</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserType&lt;Identity&gt;">UserType&lt;Identity&gt;</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserType&lt;IdentityId&gt;">UserType&lt;IdentityId&gt;</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserType&lt;Message&gt;">UserType&lt;Message&gt;</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserType&lt;MsgId&gt;">UserType&lt;MsgId&gt;</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserType&lt;Network::Server&gt;">UserType&lt;Network::Server&gt;</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserType&lt;NetworkId&gt;">UserType&lt;NetworkId&gt;</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserType&lt;NetworkId&gt;">UserType&lt;NetworkId&gt;</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-UserType&lt;NetworkInfo&gt;">UserType&lt;NetworkInfo&gt;</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/buffer.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/*
+ * libquassel
+ * https://github.com/magne4000/node-libquassel
+ *
+ * Copyright (c) 2017 Jo&#xEB;l Charles
+ * Licensed under the MIT license.
+ */
+
+/** @module buffer */
+
+const logger = require(&apos;debug&apos;)(&apos;libquassel:buffer&apos;);
+const { util } = require(&apos;qtdatastream&apos;);
+
+import { IRCMessage } from &apos;./message&apos;;
+
+/**
+ * BufferInfo object representation
+ * @typedef {Object} BufferInfo
+ * @property {number} id
+ * @property {number} network
+ * @property {number} type
+ * @property {number} group
+ * @property {String} name
+ */
+
+/**
+ * @type {Object}
+ * @property {number} Types.INVALID
+ * @property {number} Types.STATUS
+ * @property {number} Types.CHANNEL
+ * @property {number} Types.QUERY
+ * @property {number} Types.GROUP
+ */
+export const Types = {
+  INVALID: 0x00,
+  STATUS: 0x01,
+  CHANNEL: 0x02,
+  QUERY: 0x04,
+  GROUP: 0x08
+};
+
+/**
+ * User attached to a buffer, with its modes
+ */
+export class IRCBufferUser {
+
+  /** @type {IRCUser} */
+  user;
+  /** @type {boolean} */
+  isOp;
+  /** @type {boolean} */
+  isHalfOp; /** @type {boolean} */
+  isOwner;
+  /** @type {boolean} */
+  isAdmin;
+  /** @type {boolean} */
+  isVoiced;
+
+  /**
+   * @param {IRCUser} user
+   * @param {string} modes
+   */
+  constructor(user, modes) {
+    this.user = user;
+    this.isOp = false;
+    this.isHalfOp = false;
+    this.isOwner = false;
+    this.isAdmin = false;
+    this.isVoiced = false;
+    this._modes = &apos;&apos;;
+    this.modes = modes;
+  }
+
+  /** @type {string} */
+  get modes() {
+    return this._modes;
+  }
+
+  /** @type {string} */
+  set modes(value) {
+    this._modes = value;
+    this.isOp = this.hasMode(&apos;o&apos;);
+    this.isHalfOp = this.hasMode(&apos;h&apos;);
+    this.isOwner = this.hasMode(&apos;q&apos;);
+    this.isAdmin = this.hasMode(&apos;a&apos;);
+    this.isVoiced = this.hasMode(&apos;v&apos;);
+  }
+
+  /**
+   * Returns `true` if user has specified mode
+   * @param {string} mode
+   * @returns {boolean}
+   */
+  hasMode(mode) {
+    return this._modes.indexOf(mode) !== -1;
+  }
+}
+
+/**
+ * Quassel respresentation of a buffer
+ */
+export class IRCBuffer {
+
+  /** @type {?number} */
+  id;
+  /** @type {boolean} */
+  isChannel;
+  /** @type {boolean} */
+  isActive;
+  /** @type {boolean} */
+  isStatusBuffer;
+  /** @type {?number} */
+  lastMessageId;
+  /** @type {?number} */
+  firstMessageId;
+  /**
+   * Map of users of this channel.
+   * @type {Map&lt;string, IRCBufferUser&gt;}
+   */
+  users;
+  /**
+   * Map of messages in this buffer.
+   * @type {Map&lt;number, IRCMessage&gt;}
+   */
+  messages;
+  /** @type {?Types} */
+  type;
+  /** @type {number} */
+  network;
+  /** @type {number} */
+  group;
+
+
+  /**
+   * @param {object} data
+   */
+  constructor(data) {
+    this._name = null;
+    this.isChannel = false;
+    this.isActive = false;
+    this.id = null;
+    this.users = new Map();
+    this.messages = new Map();
+    this.lastMessageId = null;
+    this.firstMessageId = null;
+
+    this.update(data);
+    this.isStatusBuffer = (this.type === Types.STATUS);
+  }
+
+  /**
+   * Add {@link IRCUser} to the buffer
+   * @param {IRCUser} user
+   * @param {string} modes
+   */
+  addUser(user, modes) {
+    if (user &amp;&amp; typeof user.nick === &apos;string&apos;) {
+      this.users.set(user.nick, new IRCBufferUser(user, modes));
+    }
+  }
+
+  /**
+   * Add a mode to an {@link IRCUser}
+   * @param {IRCUser} user
+   * @param {string} mode
+   */
+  addUserMode(user, mode) {
+    if (user &amp;&amp; typeof user.nick === &apos;string&apos;) {
+      const userAndModes = this.users.get(user.nick);
+      if (userAndModes) userAndModes.modes += mode;
+    }
+  }
+
+  /**
+   * remove mode from an {@link IRCUser}
+   * @param {IRCUser} user
+   * @param {string} mode
+   */
+  removeUserMode(user, mode) {
+    if (user &amp;&amp; typeof user.nick === &apos;string&apos;) {
+      let userAndModes = this.users.get(user.nick);
+      if (userAndModes) userAndModes.modes = userAndModes.modes.replace(mode, &apos;&apos;);
+    }
+  }
+
+  /**
+   * Check if current buffer contains specified user
+   * @param {string|IRCUser} nick
+   * @returns {boolean}
+   */
+  hasUser(nick) {
+    if (nick === undefined || nick === null) {
+      logger(&apos;User should not be null or undefined&apos;);
+      return null;
+    }
+    return this.users.has(typeof nick.nick === &apos;string&apos; ? nick.nick : nick);
+  }
+
+  /**
+   * Remove user from buffer
+   * @param {string|IRCUser} nick
+   */
+  removeUser(nick) {
+    this.users.delete(typeof nick.nick === &apos;string&apos; ? nick.nick : nick);
+  }
+
+  /**
+   * Update user maps hashes with current .nick
+   * @param {string} oldnick
+   */
+  updateUserMaps(oldnick) {
+    const userAndModes = this.users.get(oldnick);
+    if (oldnick !== userAndModes.user.nick) {
+      this.users.set(userAndModes.user.nick, userAndModes);
+      this.users.delete(oldnick);
+    }
+  }
+
+  /**
+   * Add an {@link IRCMessage} to the buffer
+   * @param {Object} message
+   * @returns {?IRCMessage} the message, if successfully added, `undefined` otherwise
+   */
+  addMessage(message) {
+    if (this.messages.has(message.id)) return undefined;
+    if (this.lastMessageId === null || this.lastMessageId &lt; message.id) {
+      this.lastMessageId = message.id;
+    }
+    if (this.firstMessageId === null || this.firstMessageId &gt; message.id) {
+      this.firstMessageId = message.id;
+    }
+    const ircmsg = new IRCMessage(message);
+    this.messages.set(message.id, ircmsg);
+    return ircmsg;
+  }
+
+  /**
+   * Update internal lastMessageId and firstMessageId
+   * @protected
+   */
+  _updateFirstAndLast() {
+    this.lastMessageId = null;
+    this.firstMessageId = null;
+    for (let key of this.messages.keys()) {
+      if (this.lastMessageId === null || this.lastMessageId &lt; key) this.lastMessageId = key;
+      if (this.firstMessageId === null || this.firstMessageId &gt; key) this.firstMessageId = key;
+    }
+  }
+
+  /**
+   * Clear buffer messages
+   */
+  clearMessages() {
+    this.lastMessageId = null;
+    this.firstMessageId = null;
+    this.messages.clear();
+  }
+
+  /**
+   * Delete a message from the buffer
+   * @param {number} messageId
+   */
+  deleteMessage(messageId) {
+    if (this.messages.size &lt;= 1) {
+      this.clearMessages();
+    } else {
+      this.messages.delete(messageId);
+      this._updateFirstAndLast();
+    }
+  }
+
+  /**
+   * Trim messages and leave only `n` messages
+   * @param {number} n
+   */
+  trimMessages(n) {
+    if (n &lt;= 0) {
+      this.clearMessages();
+    } else if (n &lt; this.messages.size) {
+      let idsToKeep = [], newMap = new Map;
+      this.messages.forEach((val, key) =&gt; {
+        idsToKeep.push(key);
+      });
+      idsToKeep.sort();
+      idsToKeep.splice(0, idsToKeep.length - n);
+      idsToKeep.forEach(val =&gt; {
+        newMap.set(val, this.messages.get(val));
+      });
+      this.messages = newMap;
+      this._updateFirstAndLast();
+    }
+  }
+
+  /**
+   * Check if specified `messageId` is the last one of this buffer
+   * @param {number} messageId
+   * @returns {boolean}
+   */
+  isLast(messageId) {
+    return this.lastMessageId === messageId;
+  }
+
+  /**
+   * get {@link BufferInfo} corresponding to the current buffer
+   * @returns {BufferInfo}
+   */
+  getBufferInfo() {
+    return {
+      id: this.id,
+      network: this.network,
+      type: this.type,
+      group: this.group || 0,
+      name: this.name
+    };
+  }
+
+  get firstMessage() {
+    return this.messages.get(this.firstMessageId);
+  }
+
+  get lastMessage() {
+    return this.messages.get(this.lastMessageId);
+  }
+
+  set name(value) {
+    this._name = value ? value.toString() : null;
+    this.isChannel = (this._name &amp;&amp; &apos;#&amp;+!&apos;.indexOf(this._name[0]) !== -1);
+  }
+
+  get name() {
+    return this._name;
+  }
+
+  update(data) {
+    Object.assign(this, data);
+  }
+
+  toString() {
+    return `&lt;IRCBuffer ${this._name ? this._name : &apos;*&apos;}&gt;`;
+  }
+}
+
+/**
+ * A collection of buffers
+ */
+export class IRCBufferCollection extends Map {
+
+  constructor(...args) {
+    if (args.length &gt; 0) throw new Error(`IRCBufferCollection doesn&apos;t support initializing with values.`);
+    super();
+    // This map references buffers by their IDs for quick lookup
+    this._map_buffer_ids = new Map();
+  }
+
+  /**
+   * Add a buffer to this collection
+   * @param {IRCBuffer} buffer
+   */
+  add(buffer) {
+    if (this.has(buffer.name)) {
+      logger(&apos;Buffer already added (%s)&apos;, buffer.name);
+      return;
+    }
+    this.set(buffer.name, buffer);
+  }
+
+  /**
+   * @override
+   */
+  set(key, value) {
+    if (key !== null &amp;&amp; typeof key !== &apos;string&apos;) throw new Error(`Key must be a string or null`);
+    key = key === null ? null : key.toLowerCase();
+    if (value.id !== -1) {
+      this._map_buffer_ids.set(value.id, key);
+    }
+    super.set(key, value);
+  }
+
+  /**
+   * Get the buffer by name if `key` is a `String` or a `Buffer`, by id otherwise
+   * @param {number|string|Buffer} key
+   * @override
+   * @returns {?Buffer}
+   */
+  get(key) {
+    if (typeof key === &apos;number&apos;) {
+      return this.get(this._map_buffer_ids.get(key));
+    }
+    if (key === undefined) return void 0;
+    if (key instanceof Buffer) {
+      key = util.str(key);
+    }
+    return super.get(key === null ? null : key.toLowerCase());
+  }
+
+  /**
+   * Does the buffer exists in this collection
+   * @param {number|string|Buffer} key
+   * @override
+   * @returns {boolean}
+   */
+  has(key) {
+    if (key === undefined) return false;
+    if (key instanceof Buffer) {
+      key = util.str(key);
+    }
+    if (typeof key === &apos;number&apos;) {
+      return this._map_buffer_ids.has(key);
+    }
+    return super.has(key === null ? null : key.toLowerCase());
+  }
+
+  /**
+   * Delete the buffer from the collection
+   * @param {number|string|Buffer} key
+   * @override
+   * @returns {boolean}
+   */
+  delete(key) {
+    if (key === undefined) return false;
+    if (key instanceof Buffer) {
+      key = util.str(key);
+    }
+    if (typeof key === &apos;number&apos;) {
+      const actualKey = this._map_buffer_ids.get(key);
+      this._map_buffer_ids.delete(key);
+      return super.delete(actualKey);
+    }
+    key = key === null ? null : key.toLowerCase();
+    if (super.has(key)) {
+      const elementToDelete = super.get(key);
+      super.delete(key);
+      this._map_buffer_ids.delete(elementToDelete.id);
+      return true;
+    }
+  }
+
+  /**
+   * Clear the buffer
+   * @override
+   */
+  clear() {
+    super.clear();
+    this._map_buffer_ids.clear();
+  }
+
+  /**
+   * Change buffer id
+   * @param {IRCBuffer} buffer
+   * @param {number} bufferIdTo
+   */
+  move(buffer, bufferIdTo) {
+    this.delete(buffer.name);
+    buffer.id = bufferIdTo;
+    this.set(buffer.name, buffer);
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

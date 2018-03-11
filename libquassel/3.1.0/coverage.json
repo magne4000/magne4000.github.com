@@ -1,0 +1,237 @@
+{
+  "coverage": "65.23%",
+  "expectCount": 420,
+  "actualCount": 274,
+  "files": {
+    "src/alias.js": {
+      "expectCount": 6,
+      "actualCount": 3,
+      "undocumentLines": [
+        42,
+        43,
+        44
+      ]
+    },
+    "src/buffer.js": {
+      "expectCount": 58,
+      "actualCount": 47,
+      "undocumentLines": [
+        12,
+        70,
+        138,
+        317,
+        321,
+        325,
+        330,
+        334,
+        338,
+        348,
+        352
+      ]
+    },
+    "src/bufferview.js": {
+      "expectCount": 27,
+      "actualCount": 24,
+      "undocumentLines": [
+        43,
+        161,
+        165
+      ]
+    },
+    "src/highlight.js": {
+      "expectCount": 21,
+      "actualCount": 13,
+      "undocumentLines": [
+        9,
+        10,
+        63,
+        80,
+        81,
+        82,
+        83,
+        141
+      ]
+    },
+    "src/identity.js": {
+      "expectCount": 30,
+      "actualCount": 8,
+      "undocumentLines": [
+        9,
+        19,
+        22,
+        25,
+        28,
+        31,
+        34,
+        37,
+        40,
+        43,
+        46,
+        49,
+        52,
+        55,
+        73,
+        74,
+        88,
+        91,
+        94,
+        96,
+        105,
+        124
+      ]
+    },
+    "src/ignore.js": {
+      "expectCount": 28,
+      "actualCount": 21,
+      "undocumentLines": [
+        9,
+        10,
+        136,
+        146,
+        158,
+        159,
+        241
+      ]
+    },
+    "src/libquassel.js": {
+      "expectCount": 51,
+      "actualCount": 48,
+      "undocumentLines": [
+        10,
+        11,
+        548
+      ]
+    },
+    "src/message.js": {
+      "expectCount": 23,
+      "actualCount": 17,
+      "undocumentLines": [
+        9,
+        106,
+        109,
+        110,
+        112,
+        188
+      ]
+    },
+    "src/network.js": {
+      "expectCount": 82,
+      "actualCount": 38,
+      "undocumentLines": [
+        9,
+        10,
+        11,
+        34,
+        68,
+        71,
+        74,
+        77,
+        80,
+        83,
+        86,
+        89,
+        92,
+        95,
+        98,
+        100,
+        105,
+        124,
+        135,
+        158,
+        161,
+        164,
+        167,
+        170,
+        173,
+        176,
+        179,
+        182,
+        185,
+        188,
+        191,
+        194,
+        197,
+        200,
+        203,
+        206,
+        209,
+        223,
+        224,
+        238,
+        246,
+        267,
+        393,
+        397
+      ]
+    },
+    "src/request.js": {
+      "expectCount": 47,
+      "actualCount": 36,
+      "undocumentLines": [
+        9,
+        10,
+        11,
+        12,
+        91,
+        93,
+        94,
+        95,
+        96,
+        97,
+        411
+      ]
+    },
+    "src/tls.js": {
+      "expectCount": 17,
+      "actualCount": 0,
+      "undocumentLines": [
+        1,
+        2,
+        3,
+        5,
+        6,
+        8,
+        9,
+        10,
+        12,
+        13,
+        18,
+        74,
+        79,
+        93,
+        100,
+        103,
+        115
+      ]
+    },
+    "src/user.js": {
+      "expectCount": 22,
+      "actualCount": 19,
+      "undocumentLines": [
+        47,
+        51,
+        54
+      ]
+    },
+    "src/usertypes.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        1
+      ]
+    },
+    "src/websocket.js": {
+      "expectCount": 7,
+      "actualCount": 0,
+      "undocumentLines": [
+        2,
+        4,
+        20,
+        21,
+        24,
+        48,
+        50
+      ]
+    }
+  }
+}
